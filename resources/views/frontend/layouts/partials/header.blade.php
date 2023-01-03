@@ -55,14 +55,17 @@
               <a class="dropdown-item" href="#">Filter By Top Borrowed</a>
             </div>
           </li> --}}
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sách</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="{{route('book.create')}}">Thêm sách mới</a>
-              <a class="dropdown-item" href="{{route('user.books')}}">Sách của tôi</a>
-            </div>
-          </li>
+          
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sách</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" href="{{route('book.create')}}">Thêm sách mới</a>
+            @if (Auth::check())
+            <a class="dropdown-item" href="{{route('user.books')}}">Sách của tôi</a>
+            @endif 
+          </div>
+        </li>
+             
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2 search-form" type="text" placeholder="Search" aria-label="Search">

@@ -49,7 +49,7 @@
                     <td>
                      <i class="fa fa-eye"></i> {{ $book->total_view }}
                      <br>
-                     <i class="fa fa-search"></i> {{ $book->total_search }}
+                     <i class="fa fa-heart"></i> {{ $book->total_like }}
                     </td>
                     <td>
                       @if ($book->status)

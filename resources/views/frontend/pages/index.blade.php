@@ -14,10 +14,10 @@
         <div class="carousel-item active">
           <img src="{{asset('images/sliders/slider1.png')}}" class="d-block w-100">
           <div class="carousel-caption d-none d-md-block">
-            <h3>Welcome to your Book Sharing Platform</h3>
+            <h3>Welcome to your Book </h3>
             <p>
               <a href="register.html" class="btn btn-primary slider-link">
-                Get Start Now
+                New Account
               </a>
             </p>
           </div>
@@ -25,7 +25,7 @@
         <div class="carousel-item">
           <img src="{{asset('images/sliders/slider2.png')}}" class="d-block w-100" alt="...">
           <div class="carousel-caption d-none d-md-block">
-            <h3>Welcome to your Book Sharing Platform</h3>
+            <h3>Welcome to your Book</h3>
             <p>
               <a href="" class="btn btn-primary slider-link">
                 New Account
@@ -36,10 +36,10 @@
         <div class="carousel-item">
           <img src="{{asset('images/sliders/slider3.png')}}" class="d-block w-100" alt="...">
           <div class="carousel-caption d-none d-md-block">
-            <h3>Welcome to your Book Sharing Platform</h3>
+            <h3>Welcome to your Book </h3>
             <p>
               <a href="" class="btn btn-primary slider-link">
-                Borrow Now
+                New Account
               </a>
             </p>
           </div>

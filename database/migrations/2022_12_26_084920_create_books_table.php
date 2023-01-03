@@ -24,18 +24,16 @@ return new class extends Migration
 
             $table->boolean('status')->default(0);
             $table->unsignedInteger('total_view')->default(0);
-            $table->unsignedInteger('total_search')->default(0);
-            $table->unsignedInteger('total_borrowed')->default(0);
+            $table->unsignedInteger('total_like')->default(0);
             $table->unsignedInteger('user_id')->nullable()->index();
 
             $table->unsignedInteger('category_id')->index();
             $table->unsignedInteger('publisher_id')->index();
-            $table->unsignedInteger('translate_id')->nullable()->index();
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('publisher_id')->references('id')->on('publishers');
-            // // $table->foreign('user_id')->references('id')->on('users');
+            //$table->foreign('user_id')->references('id')->on('users');
         });
     }
 
