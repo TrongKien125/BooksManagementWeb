@@ -29,6 +29,8 @@ use App\Http\Controllers\UsersBookController;
 
 //Route::get('/public', [App\Http\Controllers\PagesController::class, 'index'])->name('page');
 Route::resource('/book', BookController::class);
+Route::get('/book/like/{book_id}', [BookController::class,'like'])->name('likebook');
+Route::get('/book/read/{book_id}', [BookController::class,'read'])->name('readbook');
 
 Route::group(['prefix'=>'/admin'],function(){
     Route::get('/', [PagesController::class, 'index'])->name('admin.index');

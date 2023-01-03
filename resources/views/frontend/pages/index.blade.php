@@ -114,9 +114,9 @@
                   <img src="{{asset('images/books/'.$book->image)}}" alt="">
                   <div class="book-short-info">
                     <h5>{{$book->title}}</h5>
-                    <br>
+                    
+                    <p><i class="fa fa-eye" >  {{ $book->total_view }}</i>  <i class="fa fa-heart">  {{ $book->total_like }}</i> </p>
                     <a href="{{route('book.show',$book->id)}}" class="btn btn-outline-primary"><i class="fa fa-eye"></i> View</a>
-                    <a href="" class="btn btn-outline-danger"><i class="fa fa-heart"></i> Thích </a>
                   </div>
                 </div>
               </div> <!-- Single Book Item -->

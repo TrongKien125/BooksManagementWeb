@@ -116,6 +116,18 @@ class BookController extends Controller
         );
     }
 
+    public function like($id) {
+        $book = Book::find($id);
+        $book->update(['total_like'=>$book->total_like + 1]);
+        return back();
+    }
+
+    public function read($id) {
+        $book = Book::find($id);
+        $book->update(['total_view'=>$book->total_view + 1]);
+        return back();
+    }
+
 
     /**
      * Show the form for editing the specified resource.
