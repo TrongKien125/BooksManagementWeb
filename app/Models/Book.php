@@ -28,5 +28,5 @@ class Book extends Model
     //     BookAuthor::where('book_id', $book_id)->where('author_id',$author_id);
         
     // }
-    public $fillable = ['title','slug','category_id','publisher_id','public_year','description','status','image','user_id', 'total_like', 'total_view'];
+    public $fillable = ['title','slug','category_id','publisher_id','public_year','description','status','image','user_id', 'total_like', 'total_view','file'];
 }

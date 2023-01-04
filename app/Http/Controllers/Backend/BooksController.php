@@ -61,6 +61,7 @@ class booksController extends Controller
             'description'=>'nullable',
             'author_ids'=>'required',
             'image'=>'required|image',
+            'file'=>'required|mimes:pdf|max:10000',
         ], [
             'title.required' => 'Bạn chưa nhập tên sách',
             'category_id.required' => 'Bạn chưa chọn thể loại sách',
@@ -68,6 +69,7 @@ class booksController extends Controller
             'public_year.required' => 'Bạn chưa chọn năm phát hành',
             'author_ids.required' => 'Bạn chưa nhập tên tác giả',
             'image.required' => 'Bạn chưa thêm hình ảnh',
+            'file.required' => 'Bạn chưa thêm file',
             'title.unique' => 'Sách này đã tồn tại',
         ]);
 
@@ -79,6 +81,14 @@ class booksController extends Controller
             $file->move('images/books', $new_file);
         }
 
+        if($request->file('file')) {
+            //dd($request->file('image'));
+            $file_book = $request->file('file');
+            $name_file = $file_book->getClientOriginalName();
+            $new_file_book = time().'-'.$name_file;
+            $file_book->move('file_upload', $new_file_book);
+        }
+
         $book = Book::create([
             'title' => $request->input('title'),
             'slug' => str_slug($request->input('title')),
@@ -87,6 +97,7 @@ class booksController extends Controller
             'public_year'=>$request->public_year,
             'description' => $request->input('description'),
             'image'=>$new_file,
+            'file'=>$new_file_book,
             'status'=>1,
         ]);
         $book->save();
@@ -152,6 +163,7 @@ class booksController extends Controller
             'description'=>'nullable',
             'author_ids'=>'required',
             'image'=>'image',
+            'file'=>'mimes:pdf|max:10000'
         ], [
             'title.required' => 'Bạn chưa nhập tên sách',
             'category_id.required' => 'Bạn chưa chọn thể loại sách',
@@ -174,6 +186,21 @@ class booksController extends Controller
             $file->move('images/books', $new_file);
             $book->update([
                 'image'=>$new_file
+            ]);
+        }
+
+        if($request->file('file')) {
+            //dd($request->file('image'));
+            $old_file = 'file_upload/'.$book->file;
+            if(file_exists($old_file)){
+                unlink($old_file);
+            }
+            $file_book = $request->file('file');
+            $name_file = $file_book->getClientOriginalName();
+            $new_file_book = time().'-'.$name_file;
+            $file_book->move('file_upload/',$new_file_book);
+            $book->update([
+                'file'=>$new_file_book
             ]);
         }
 
@@ -214,9 +241,9 @@ class booksController extends Controller
         if(file_exists($image)){
             unlink($image);
         }
-        $old_book_authors = BookAuthor::where('book_id',$book->id)->get();
-        foreach($old_book_authors as $item) {
-            $item->delete();
+        $file = 'file_upload/'.$book->file;
+        if(file_exists($file)){
+            unlink($file);
         }
         $old_book_authors = BookAuthor::where('book_id',$book->id)->get();
         foreach($old_book_authors as $item) {

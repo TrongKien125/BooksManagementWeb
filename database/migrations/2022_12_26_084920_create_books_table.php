@@ -21,12 +21,13 @@ return new class extends Migration
             $table->string('public_year')->nullable();
             $table->text('description')->nullable();
             $table->string('image')->nullable();
+            $table->string('file');
 
             $table->boolean('status')->default(0);
             $table->unsignedInteger('total_view')->default(0);
             $table->unsignedInteger('total_like')->default(0);
             $table->unsignedInteger('user_id')->nullable()->index();
-
+        
             $table->unsignedInteger('category_id')->index();
             $table->unsignedInteger('publisher_id')->index();
             $table->timestamps();

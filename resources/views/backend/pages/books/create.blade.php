@@ -69,6 +69,13 @@
                     <input name='image' type="file" class="form-control" required>
                 </div>
                 <div class="col-md-6"></div>
+
+                <div class="col-md-6">
+                  <label for="file" class="file">File sách</label>
+                  <br>
+                  <input name='file' type="file" class="form-control" required>
+                </div>
+                <div class="col-md-6"></div>
                 
                 <div class="col-12">
                   <label for="">Tóm tắt nội dung sách</label>

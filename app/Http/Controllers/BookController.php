@@ -20,7 +20,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        return view('frontend.pages.books.show');
+        //return view('frontend.pages.books.show');
     }
 
     /**
@@ -56,6 +56,7 @@ class BookController extends Controller
             'description'=>'nullable',
             'author_ids'=>'required',
             'image'=>'required|image',
+            'file'=>'required|mimes:pdf|max:10000',
         ], [
             'title.required' => 'Bạn chưa nhập tên sách',
             'category_id.required' => 'Bạn chưa chọn thể loại sách',
@@ -63,6 +64,7 @@ class BookController extends Controller
             'public_year.required' => 'Bạn chưa chọn năm phát hành',
             'author_ids.required' => 'Bạn chưa nhập tên tác giả',
             'image.required' => 'Bạn chưa thêm hình ảnh',
+            'file.required' => 'Bạn chưa thêm file',
             'title.unique' => 'Sách này đã tồn tại',
         ]);
 
@@ -74,6 +76,14 @@ class BookController extends Controller
             $file->move('images/books', $new_file);
         }
 
+        if($request->file('file')) {
+            //dd($request->file('image'));
+            $file_book = $request->file('file');
+            $name_file = $file_book->getClientOriginalName();
+            $new_file_book = time().'-'.$name_file;
+            $file_book->move('file_upload', $new_file_book);
+        }
+
         $book = Book::create([
             'title' => $request->input('title'),
             'slug' => str_slug($request->input('title')),
@@ -82,6 +92,7 @@ class BookController extends Controller
             'public_year'=>$request->public_year,
             'description' => $request->input('description'),
             'image'=>$new_file,
+            'file'=>$new_file_book,
             'user_id'=>Auth::user()->id,
             'status'=>1,
         ]);
@@ -125,7 +136,9 @@ class BookController extends Controller
     public function read($id) {
         $book = Book::find($id);
         $book->update(['total_view'=>$book->total_view + 1]);
-        return back();
+        return view('frontend.pages.books.read',[
+            'book'=>$book
+        ]);
     }
 
 

@@ -34,6 +34,7 @@
               <a href="{{route('likebook', $book->id)}}" class="btn btn-outline-danger"><i class="fa fa-heart"></i>  Thích  </a>
           </div>
         </div>
+        {{-- <iframe src="{{asset('images/books/In phiếu dự thi TOEIC.pdf')}}" frameborder="0" width="100%" height="600px"></iframe> --}}
 
       </div>
     </div>

@@ -57,6 +57,7 @@ class UsersBookController extends Controller
             'description'=>'nullable',
             'author_ids'=>'required',
             'image'=>'image',
+            'file'=>'mimes:pdf|max:10000'
         ], [
             'title.required' => 'Bạn chưa nhập tên sách',
             'category_id.required' => 'Bạn chưa chọn thể loại sách',
@@ -82,6 +83,21 @@ class UsersBookController extends Controller
             ]);
         }
 
+        if($request->file('file')) {
+            //dd($request->file('image'));
+            $old_file = 'file_upload/'.$book->file;
+            if(file_exists($old_file)){
+                unlink($old_file);
+            }
+            $file_book = $request->file('file');
+            $name_file = $file_book->getClientOriginalName();
+            $new_file_book = time().'-'.$name_file;
+            $file_book->move('file_upload/',$new_file_book);
+            $book->update([
+                'file'=>$new_file_book
+            ]);
+        }
+
         $book->update([
             'title' => $request->input('title'),
             'slug' => str_slug($request->input('title')),
@@ -100,9 +116,10 @@ class UsersBookController extends Controller
             $bookAuthor = BookAuthor::create([
                 'book_id'=> $book->id,
                 'author_id'=> $author_id
-            ]); 
-            $bookAuthor->save();
+            ]);
         }
+
+        $bookAuthor->save();
         return back()->with('success','Sửa thành công.');
     }
 
@@ -112,6 +129,10 @@ class UsersBookController extends Controller
         $image = 'images/books/'.$book->image;
         if(file_exists($image)){
             unlink($image);
+        }
+        $file = 'file_upload/'.$book->file;
+        if(file_exists($file)){
+            unlink($file);
         }
         $old_book_authors = BookAuthor::where('book_id',$book->id)->get();
         foreach($old_book_authors as $item) {
