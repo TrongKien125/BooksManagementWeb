@@ -31,6 +31,8 @@ use App\Http\Controllers\UsersBookController;
 Route::resource('/book', BookController::class);
 Route::get('/book/like/{book_id}', [BookController::class,'like'])->name('likebook');
 Route::get('/book/read/{book_id}', [BookController::class,'read'])->name('readbook');
+Route::post('/book/search', [BookController::class,'search'])->name('booksearch');
+Route::post('/book/search-advance', [BookController::class,'searchAdvance'])->name('searchadvance');
 
 Route::group(['prefix'=>'/admin'],function(){
     Route::get('/', [PagesController::class, 'index'])->name('admin.index');

@@ -3,59 +3,6 @@
 @section('content')
     <!------Content--------->
 <div class="main-content">
-    <!-- Carousel -->
-    <div id="carouselExampleIndicators" class="carousel slide main-slider" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="{{asset('images/sliders/slider1.png')}}" class="d-block w-100">
-          <div class="carousel-caption d-none d-md-block">
-            <h3>Welcome to your Book </h3>
-            <p>
-              <a href="register.html" class="btn btn-primary slider-link">
-                New Account
-              </a>
-            </p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img src="{{asset('images/sliders/slider2.png')}}" class="d-block w-100" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h3>Welcome to your Book</h3>
-            <p>
-              <a href="" class="btn btn-primary slider-link">
-                New Account
-              </a>
-            </p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img src="{{asset('images/sliders/slider3.png')}}" class="d-block w-100" alt="...">
-          <div class="carousel-caption d-none d-md-block">
-            <h3>Welcome to your Book </h3>
-            <p>
-              <a href="" class="btn btn-primary slider-link">
-                New Account
-              </a>
-            </p>
-          </div>
-        </div>
-      </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-    <!-- Carousel -->
-  
     <div class="advance-search">
       <div class="container">
         <h3>Tìm kiếm</h3>
@@ -68,7 +15,6 @@
                   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='content' placeholder="Tên sách/Nội dung sách">
                 </div>
             </div>
-
             <div class="col-md-3">
               <div class="form-group" name='publisher_id'>
                   <label for="exampleInputEmail1">Nhà xuất bản</label>
@@ -93,7 +39,7 @@
             </div>
             <div class="col-md-1">
                  <button type="submit" class="btn btn-success btn-lg" name="">
-                  <i class="fa fa-search"></i>
+                  <i class="fa fa-search"></i> 
                  </button>
             </div>
           </div>
@@ -106,7 +52,7 @@
         <div class="row">
   
           <div class="col-md-9">
-            <h3>Gần đây</h3>
+            <h3>Kết quả tìm kiếm: {{$search}}</h3>
   
             <div class="row">
               @foreach ($books as $book)

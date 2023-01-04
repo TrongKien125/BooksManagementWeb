@@ -30,19 +30,29 @@ class HomeController extends Controller
     public function index()
     {
         $books = Book::all();
-        $categories = Category::all(); 
+        $categories = Category::all();
+        $authors = Author::all();
+        $publishers = Publisher::all();
+        $bookauthors = BookAuthor::all();  
         return view('frontend.pages.index',[
             'books'=>$books,
             'categories'=>$categories,
+            'publishers'=>$publishers,
+            'authors'=>$authors,
         ]);
     }
 
     public function bookClassification($category_id) {
         $categories = Category::all();
-        $books = Book::where('category_id', $category_id)->get();
+        $authors = Author::all();
+        $publishers = Publisher::all();
+        $bookauthors = BookAuthor::all();
+        $books = Book::orderBy('id','desc')->where('category_id', $category_id)->paginate(10);
         return view('frontend.pages.index',[
             'books'=>$books,
-            'categories'=>$categories
+            'categories'=>$categories,
+            'publishers'=>$publishers,
+            'authors'=>$authors,
         ]);
     }
 }

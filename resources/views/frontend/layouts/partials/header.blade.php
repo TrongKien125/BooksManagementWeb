@@ -46,15 +46,6 @@
           <li class="nav-item active">
             <a class="nav-link" href="{{route('home')}}">Trang chủ <span class="sr-only">(current)</span></a>
           </li>
-          {{-- <li class="nav-item">
-            <a class="nav-link" href="top-books.html">Top Books</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter Books By</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="#">Filter By Top Borrowed</a>
-            </div>
-          </li> --}}
           
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sách</a>
@@ -67,8 +58,9 @@
         </li>
              
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2 search-form" type="text" placeholder="Search" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0" action="{{route('booksearch')}}" method="POST">
+          @csrf
+          <input class="form-control mr-sm-2 search-form" type="text" name='string_search' placeholder="Tìm kiếm" aria-label="Search" required>
           <button class="btn btn-secondary my-2 my-sm-0 search-button" type="submit"><i class="fa fa-search"></i></button>
         </form>
       </div>

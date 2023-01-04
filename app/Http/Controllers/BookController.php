@@ -142,6 +142,52 @@ class BookController extends Controller
     }
 
 
+    public function search(Request $request){
+        $categories = Category::all();
+        $authors = Author::all();
+        $publishers = Publisher::all();
+        $bookauthors = BookAuthor::all(); 
+        $search = $request->string_search;
+        $books = Book::orderBy('id','desc')
+        ->where('title', 'like', '%'.$search.'%')
+        ->orWhere('description', 'like', '%'.$search.'%')
+        ->paginate(10);
+        return view('frontend.pages.books.index',[
+            'search'=>$search,
+            'books'=>$books,
+            'categories'=>$categories,
+            'publishers'=>$publishers,
+            'authors'=>$authors,
+        ]);
+    }
+
+    public function searchAdvance(Request $request){
+        $categories = Category::all();
+        $authors = Author::all();
+        $publishers = Publisher::all();
+        $bookauthors = BookAuthor::all(); 
+        $search = $request->content;
+        $publisher = $request->publisher_id;
+        $category = $request->category_id;
+        if(empty($search) && empty($publisher) && empty($categories)){
+            return $this->index();
+        }
+        $books = Book::orderBy('id','desc')
+        ->where('title', 'like', '%'.$search.'%')
+        ->orwhere('category_id', $category)
+        ->orwhere('publisher_id',$publisher)
+        ->orWhere('description', 'like', '%'.$search.'%')
+        ->orpaginate(10);
+        return view('frontend.pages.books.index',[
+            'search'=>$search,
+            'books'=>$books,
+            'categories'=>$categories,
+            'publishers'=>$publishers,
+            'authors'=>$authors,
+        ]);
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      *
